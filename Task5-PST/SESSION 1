@@ -1,0 +1,42 @@
+import java.util.Scanner;
+
+class StudentCheck {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Input Age and Marks
+        System.out.print("Enter Age: ");
+        int age = scanner.nextInt();
+
+        System.out.print("Enter Marks: ");
+        int marks = scanner.nextInt();
+
+        System.out.println("\n--- EVALUATION ---");
+
+        // Constraints Check
+        boolean isAgeValid = age >= 18;
+        boolean isMarksValid = marks >= 75;
+
+        if (isAgeValid && isMarksValid) {
+            System.out.println("RESULT: ACCEPTED (Eligible)");
+        } else {
+            System.out.println("RESULT: REJECTED");
+            if (!isAgeValid) {
+                System.out.println(" Reason: Age must be 18 or older (Entered: " + age + ")");
+            }
+            if (!isMarksValid) {
+                System.out.println(" Reason: Marks must be 75 or higher (Entered: " + marks + ")");
+            }
+        }
+
+        scanner.close();
+    }
+}
+OUTPUT:
+Enter Age: 20
+Enter Marks: 88
+
+--- EVALUATION ---
+RESULT: ACCEPTED (Eligible)
+
+=== Code Execution Successful ===
