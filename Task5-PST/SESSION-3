@@ -1,0 +1,49 @@
+import java.io.*;
+
+public class EfficientCode {
+    // Fast I/O Reader
+    static class FastRead {
+        InputStream in = System.in;
+        byte[] buffer = new byte[1 << 16];
+        int head = 0, tail = 0;
+
+        int nextInt() throws Exception {
+            int num = 0, b;
+            while ((b = read()) <= ' ');
+            while (b >= '0' && b <= '9') {
+                num = num * 10 + (b - '0');
+                b = read();
+            }
+            return num;
+        }
+
+        private byte read() throws Exception {
+            if (head >= tail) {
+                head = 0;
+                tail = in.read(buffer, 0, buffer.length);
+            }
+            return buffer[head++];
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        // Fast Input & Output Setup
+        FastRead in = new FastRead();
+        StringBuilder out = new StringBuilder(1 << 16);
+
+        // Bitwise Trick: Check if even & power of 2 in O(1)
+        int n = 16;
+        boolean isEven = (n & 1) == 0;
+        boolean isPowerOfTwo = (n > 0) && ((n & (n - 1)) == 0);
+
+        out.append("N: ").append(n)
+           .append(" | Even: ").append(isEven)
+           .append(" | Power of 2: ").append(isPowerOfTwo).append("\n");
+
+        System.out.print(out);
+    }
+}
+OUTPUT:
+N: 16 | Even: true | Power of 2: true
+
+=== Code Execution Successful ===
