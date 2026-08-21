@@ -1,0 +1,71 @@
+import java.util.*;
+
+public class CompetitivePatterns {
+
+    // 1. TWO POINTERS (Target Sum in Sorted Array)
+    public static boolean twoPointers(int[] arr, int target) {
+        int left = 0, right = arr.length - 1;
+        while (left < right) {
+            int sum = arr[left] + arr[right];
+            if (sum == target) return true;
+            if (sum < target) left++;
+            else right--;
+        }
+        return false;
+    }
+
+    // 2. SLIDING WINDOW (Max Sum Subarray of Size K)
+    public static int slidingWindow(int[] arr, int k) {
+        int windowSum = 0, maxSum = 0;
+        for (int i = 0; i < arr.length; i++) {
+            windowSum += arr[i];
+            if (i >= k - 1) {
+                maxSum = Math.max(maxSum, windowSum);
+                windowSum -= arr[i - (k - 1)];
+            }
+        }
+        return maxSum;
+    }
+
+    // 3. PREFIX SUM (Range Sum Query [L, R])
+    public static int prefixSumQuery(int[] arr, int L, int R) {
+        int[] prefix = new int[arr.length + 1];
+        for (int i = 0; i < arr.length; i++) {
+            prefix[i + 1] = prefix[i] + arr[i];
+        }
+        return prefix[R + 1] - prefix[L];
+    }
+
+    // 4. BINARY SEARCH (Lower Bound / First Index >= Target)
+    public static int binarySearch(int[] arr, int target) {
+        int low = 0, high = arr.length - 1, ans = -1;
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (arr[mid] >= target) {
+                ans = mid;
+                high = mid - 1;
+            } else {
+                low = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    // DRIVER METHOD TO TEST ALL PATTERNS
+    public static void main(String[] args) {
+        int[] sortedArr = {1, 3, 5, 8, 12, 15};
+        int[] arr = {2, 1, 5, 1, 3, 2};
+
+        System.out.println("1. Two Pointers (Has pair sum 13): " + twoPointers(sortedArr, 13));
+        System.out.println("2. Sliding Window (Max sum size 3): " + slidingWindow(arr, 3));
+        System.out.println("3. Prefix Sum (Range sum [1, 4]): " + prefixSumQuery(arr, 1, 4));
+        System.out.println("4. Binary Search (Lower bound of 8): Index " + binarySearch(sortedArr, 8));
+    }
+}
+OUTPUT:
+1. Two Pointers (Has pair sum 13): true
+2. Sliding Window (Max sum size 3): 9
+3. Prefix Sum (Range sum [1, 4]): 10
+4. Binary Search (Lower bound of 8): Index 3
+
+=== Code Execution Successful ===
